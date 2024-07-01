@@ -13,13 +13,15 @@ import { auth, db, storage } from "../firebaseConfig";
 import router from "../router";
 import { useDatabaseStore } from "./database";
 import { useProductStore } from "./product";
+import { colSize } from "ant-design-vue/lib/grid/Col";
 
 export const useUserStore = defineStore("userStore", {
   state: () => ({
     userData: null,
     loadingUser: false,
     loadingSession: false,
-    urlPhotoDefault:
+    urlPhotoDefault: "",
+    urlTemp:
       "https://st4.depositphotos.com/3864435/27060/i/450/depositphotos_270605520-stock-photo-default-avatar-profile-icon-grey.jpg",
   }),
   actions: {
@@ -31,6 +33,8 @@ export const useUserStore = defineStore("userStore", {
 
         // this.userData = { email: user.email, uid: user.uid };
         await sendEmailVerification(auth.currentUser);
+
+        console.log(auth.currentUser);
         router.push("/login");
       } catch (error) {
         console.log(error.code);
@@ -86,8 +90,8 @@ export const useUserStore = defineStore("userStore", {
           email: user.email,
           uid: user.uid,
           displayName: user.displayName,
-          photoURL: user.photoURL,
-          emailVerified: user.emailVerified,
+          photoURL: this.fotoDefault(),
+          emailVerified: false,
         };
 
         await setDoc(docRef, this.userData);
@@ -98,7 +102,7 @@ export const useUserStore = defineStore("userStore", {
 
     async fotoDefault() {
       try {
-        this.urlPhotoDefault = await getDoc();
+        return (this.urlPhotoDefault = this.urlTemp);
       } catch (error) {
         console.log(error.code);
 
@@ -115,12 +119,13 @@ export const useUserStore = defineStore("userStore", {
         );
         await this.setUser(user);
 
+        console.log("el usuario login");
+        console.log(user);
+
         await router.push("/");
 
         const productStore = useProductStore();
         await productStore.getProductos();
-
-        await router.push("/");
       } catch (error) {
         console.log(error.code);
         return error.code;
