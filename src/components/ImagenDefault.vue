@@ -1,62 +1,19 @@
 <template>
-    <h1 class="text-center">Perfil de usuario</h1>
-    <!-- <p>{{ userStore.userData }}</p> -->
-    <div class="text-center mb-5">
-        <a-avatar :src="userStore.userData.photoURL" :size="200"></a-avatar>
-    </div>
-    <a-row>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12, offset: 6 }">
+<h1>Cargar imagen Default</h1>
+
             <a-form
-                name="basicPerfil"
+                name="imagenDefault"
                 autocomplete="off"
                 layout="vertical"
                 :model="userStore.userData"
                 @finish="onFinish"
-            >
-                <a-form-item
-                    name="email"
-                    label="Tu correo (no modificable)"
-                    
-                >
-                    <a-input
-                        disabled
-                        v-model:value="userStore.userData.email"
-                    ></a-input>
-                </a-form-item>
-
-                <div v-if="userStore.esAdmin">
-                    <a-divider />
-                    <a-checkbox
-                        v-model:checked="checked"  
-                     > isAdmin </a-checkbox>
-                     <a-divider />
-                  
-                </div>
-                
-                
-                <a-form-item
-                    name="displayName"
-                    label="Ingrese su nickName"
-                    :rules="[
-                        {
-                            required: true,
-                            whitespace: true,
-                            message: 'Ingresa un nick válido',
-                        },
-                    ]"
-                >
-                    <a-input
-                        v-model:value="userStore.userData.displayName"
-                    ></a-input>
-                </a-form-item>
-
-                <a-upload
+            >   <a-upload
                     v-model:file-list="fileList"
                     list-type="picture"
                     :before-upload="beforeUpload"
                     @change="handleChange"
                 >
-                    <a-button>Subir foto perfil</a-button>
+                    <a-button>Subir img Default</a-button>
                 </a-upload>
 
                 <a-form-item class="mt-5">
@@ -65,24 +22,21 @@
                         html-type="submit"
                         :disabled="userStore.loadingUser"
                         :loading="userStore.loadingUser"
-                        >Actualizar información</a-button
+                        >Actualizar imagen</a-button
                     >
                 </a-form-item>
-            </a-form>
-        </a-col>
-    </a-row>
+            </a-form>  
+
+
 </template>
 
 <script setup>
+import { ref} from "vue";
 import { useUserStore } from "../stores/user";
 import { message } from "ant-design-vue";
-import { ref} from "vue";
 
 const userStore = useUserStore();
 const fileList = ref([]);
-
-let checked = ref(userStore.esAdmin);
-
 
 const beforeUpload = (file) => {
     return false;
@@ -114,8 +68,7 @@ const handleChange = (info) => {
         }
     }
 
-    // valida que sea solo una imagen
-    // si el user sube otra, se reemplazará
+
     let resFileList = [...info.fileList];
     resFileList = resFileList.slice(-1);
     resFileList = resFileList.map((file) => {
@@ -127,21 +80,28 @@ const handleChange = (info) => {
     fileList.value = resFileList;
 };
 
-const onFinish = async (values) => {
-    const error = await userStore.updateUser(
-        userStore.userData.displayName,
-        checked.value,
-        fileList.value[0]
+const onFinish = async (value) => {
+
+    console.log("subiendo imagen")
+    const error = await userStore.fotoDefault(
+       fileList.value[0]
     );
 
+    fileList.value = []
+
+   
+
     if (!error) {
-        fileList.value = []
+        
         beforeUpload()
         return message.success("Se actualizó tu información");
     }
     message.error("Ocurrió un error al actualizar el perfil");
 };
+
+
 </script>
+
 
 <style>
 .mb-5 {

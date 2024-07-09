@@ -2,8 +2,10 @@
     <div>
         <h2>La Montañita</h2>
         <p>{{ userStore.userData?.email }}</p>
+        <p>{{ userStore.userData?.isAdmin }}</p>
         <p>{{ userStore.userData?.displayName }}</p>
 
+        
         <div class="div-1">
            <h1 style="text-align: center;">Total: {{totalProd}}</h1>
         </div>
@@ -63,21 +65,26 @@
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
 import { useUserStore } from "../stores/user";
 import {useProductStore} from "../stores/product";
+
 import { useRouter } from "vue-router";
 import { message } from "ant-design-vue";
-import { computed, ref } from "vue";
+import { onBeforeMount } from "vue";
 
 const userStore = useUserStore();
 const productStore = useProductStore();
 const router = useRouter();
+const { totalProd } = storeToRefs(productStore)
 
- productStore.getProductos();
 
-//let totalProd = ref(productStore.getProductos().length);
 
-let totalProd = computed( () => totalProd = productStore.productos.length );
+onBeforeMount( async () => {
+    await productStore.getProductos();
+});
+
+
 
 
 

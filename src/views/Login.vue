@@ -84,6 +84,9 @@ const onFinish = async (values) => {
         case "auth/user-not-found":
             message.error("No existe el correo registrado 🗻");
             break;
+            case "auth/invalid-login-credentials":
+            message.error("Usuario o Clave Erronea, vuelva a intentar 🗻");
+            break;
         case "auth/wrong-password":
             message.error("Error de contraseña 🗻");
             break;

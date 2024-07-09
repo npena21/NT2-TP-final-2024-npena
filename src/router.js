@@ -9,6 +9,7 @@ import Register from "./views/Register.vue";
 import Producto from "./views/Producto.vue";
 import Perfil from "./views/Perfil.vue";
 import NotFound from "./views/NotFound.vue";
+import Administrar from "./views/Administrar.vue";
 
 const requireAuth = async (to, from, next) => {
   const userStore = useUserStore();
@@ -18,6 +19,19 @@ const requireAuth = async (to, from, next) => {
     next();
   } else {
     next("/login");
+  }
+  userStore.loadingSession = false;
+};
+
+const requireAuthAdmin = async (to, from, next) => {
+  const userStore = useUserStore();
+  userStore.loadingSession = true;
+
+  const user = await userStore.currentUser();
+  if (user && userStore.esAdmin) {
+    next();
+  } else {
+    next("/");
   }
   userStore.loadingSession = false;
 };
@@ -40,11 +54,18 @@ const redireccion = async (to, from, next) => {
 
 const routes = [
   { path: "/", component: Home, beforeEnter: requireAuth, name: "home" },
+
   {
     path: "/perfil",
     component: Perfil,
     beforeEnter: requireAuth,
     name: "perfil",
+  },
+  {
+    path: "/administrar",
+    component: Administrar,
+    beforeEnter: requireAuthAdmin,
+    name: "administrar",
   },
   {
     path: "/editar/:id",

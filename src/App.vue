@@ -23,6 +23,9 @@
                 <a-menu-item v-if="userStore.userData" key="producto">
                     <router-link to="/producto">Producto</router-link>
                 </a-menu-item>
+                <a-menu-item v-if="verAdmin()" key="administrar">
+                    <router-link to="/administrar">Administrar</router-link>
+                </a-menu-item>
 
                 <a-menu-item
                     @click="userStore.logoutUser"
@@ -50,6 +53,14 @@ import { useRoute } from "vue-router";
 
 const userStore = useUserStore();
 const route = useRoute();
+
+
+
+const verAdmin = () => {
+
+    return userStore.userData && userStore.esAdmin
+} ;
+
 
 const selectedKeys = ref([]);
 

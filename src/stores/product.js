@@ -1,14 +1,7 @@
 import { defineStore } from "pinia";
 import { auth, db, storage } from "../firebaseConfig";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-  signOut,
-  updateProfile,
-} from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 
 import {
   collection,
@@ -28,6 +21,11 @@ export const useProductStore = defineStore("productStore", {
     loadingProduct: false,
     photoURL: "",
   }),
+  getters: {
+    totalProd: (state) => {
+      return state.productos.length;
+    },
+  },
 
   actions: {
     async registerProduct(
@@ -40,8 +38,6 @@ export const useProductStore = defineStore("productStore", {
       this.loadingProduct = true;
 
       try {
-        console.log(imagen);
-
         if (imagen) {
           const storageRef = ref(storage, `imageProductos/${nanoid(8)}`);
           await uploadBytes(storageRef, imagen.originFileObj);
@@ -110,8 +106,6 @@ export const useProductStore = defineStore("productStore", {
     },
 
     async getProductos() {
-      console.log(this.productos.length);
-
       if (this.productos.length !== 0) {
         return;
       }

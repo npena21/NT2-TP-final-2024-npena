@@ -98,16 +98,16 @@ const onFinish = async (values) => {
         formState.password
     );
     if (!error) {
-        return message.success("Revisa tu correo electrónico y verificalo 💋");
+        return message.success("Revisa tu correo electrónico y verificalo ");
     }
 
     switch (error) {
         case "auth/email-already-in-use":
-            message.error("Email ya registrado 💋");
+            message.error("Email ya registrado ");
             break;
         default:
             message.error(
-                "Ocurrió un error en el servidor 💋 intentelo más tarde..."
+                "Ocurrió un error en el servidor  intentelo más tarde..."
             );
             break;
     }
