@@ -2,20 +2,22 @@
 
 
 <div>
-<li class="flex mb-2"> 
-    <div  @click="actualizaEstado(uid)" 
-    class="w-62 cursor-pointer p-2 border-l-8 rounder-lg flex mr-2 bg-green-400 rounded-lg"
->
+    <li class="flex "> 
 
-<span :class="`text-2xl text-white mr-4 h-8 w-8 ${isAdmin?'bg-green-600':'bg-green-200'} flex items-center justify-center rounded-lg pb-2`"></span>
-    
-<p class="text-white text-lg bg-green-300">{{uid}} 
-    <span
-    class="text-lg bg-green-400 text-gray-400"
-    >{{ email }} - {{ displayName }}</span></p>   
+        <div  @click="actualizaEstado(uid)" 
+            class="bg-veggiesgreen w-62 cursor-pointer hover:bg-ecogreen py-2 px-2 items-center border-l-8 rounded-xl flex mr-2"
+            >
 
-     </div>
-</li>
+            <span :class="`text-xl font-bold text-green-100 mr-4 h-8 w-18 ${isAdmin?'bg-green-600':'bg-green-100'} flex items-center justify-center rounded-lg p-3 `">Admin</span>
+            
+            <p class="text-gray-600 font-bold bg-green-300 rounded-xl p-2 ">{{uid}} </p>
+
+            <p class="bg-green-400 rounded-xl ml-1 pl-2 font-bold text-xl text-dark-gray-blue">{{ email }}
+            <span class="ml-1 pl-2 pr-2 bg-green-500 border-radius-2 rounded-xl text-dark-gray-blue/70">{{ displayName }}</span>
+            </p>   
+
+        </div>
+    </li>
 
     
 </div>

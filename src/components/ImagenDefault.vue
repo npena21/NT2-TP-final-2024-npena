@@ -1,7 +1,8 @@
 <template>
 
-    <div class="mb-5">
-<h1 class="text-2xl mb-3 underline">Cargar imagen Default</h1>
+    <div class="bg-veggiesgreen rounded-xl ml-3 pl-3 w-72">
+            
+        <h1 class="text-2xl mb-2 pt-4 font-bold underline">Cargar imagen Default</h1>
 
             <a-form
                 name="imagenDefault"
@@ -10,22 +11,24 @@
                 :model="userStore.userData"
                 @finish="onFinish"
             >   <a-upload
+                    class=""
                     v-model:file-list="fileList"
                     list-type="picture"
                     :before-upload="beforeUpload"
                     @change="handleChange"
                 >
-                    <a-button class="block bg-green-500 text-white hover:bg-green-400 rounded-full"
+                    <a-button class="bg-limegreen border-transparent 
+                    text-white hover:bg-green-400 hover:border-transparent hover:text-white rounded-full"
                     
                     :disabled="userStore.loadingUser"
-                        :loading="userStore.loadingUser"
+                    :loading="userStore.loadingUser"
                         >
                         Subir img default</a-button>
                     </a-upload>
 
-                <a-form-item class="mt-2 mb-5">
+                <a-form-item class="mt-2 ">
                     <a-button
-                    class="rounded-full "
+                    class="rounded-full mb-5"
                         type="primary"
                         html-type="submit"
                         :disabled="userStore.loadingUser"
@@ -90,7 +93,7 @@ const handleChange = (info) => {
 
 const onFinish = async (value) => {
 
-    console.log("subiendo imagen")
+    console.log("Subiendo imagen")
     const error = await userStore.fotoDefault(
        fileList.value[0]
     );

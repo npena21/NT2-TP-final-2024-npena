@@ -1,7 +1,7 @@
 <template>
 <div class="bg-green-200 h-54">
 
-    <h1 class="text-4xl text-center mb-10 underline ">Administrar Cuentas de Usuarios</h1>
+    <h1 class="pt-3 text-4xl text-center font-bold mb-10 underline ">Administrar Cuentas de Usuarios</h1>
 
     <div>
     <ul>
