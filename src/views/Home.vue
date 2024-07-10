@@ -1,37 +1,42 @@
 <template>
-    <div>
-        <h2>La Montañita</h2>
-        <p>{{ userStore.userData?.email }}</p>
-        <p>{{ userStore.userData?.isAdmin }}</p>
-        <p>{{ userStore.userData?.displayName }}</p>
 
-        
-        <div class="div-1">
-           <h1 style="text-align: center;">Total: {{totalProd}}</h1>
-        </div>
-      
-        
-        <!-- <add-form></add-form> -->
+<div class="flex flex-col">
+    <div class="bg-green-100 p-3 rounded-lg shadow-lg flex justify-center">
+        <img class="w-64" src="https://firebasestorage.googleapis.com/v0/b/vue-3-nt2-2024-tp.appspot.com/o/publicDefault%2Flogo_verde2.jpg?alt=media&token=52fe4745-07df-43f3-9450-002e4197063d" alt="">
+    </div>
+
+    <div class="bg-green-200 w-64 rounded-xl mt-3 ">
+        <h1 class="text-2xl font-bold ml-3"> Bienvenido: {{ userStore.userData?.displayName }}</h1>
+
+        <h1 class="text-1xl ml-3">Email: {{ userStore.userData?.email }}</h1>
+    </div>
+
+    <div class="bg-green-100 text-2xl rounded-xl mt-3 mb-3 w-24">
+        <h1 style="text-align: center;">Total: {{totalProd}}</h1>
+    </div>
+</div>  
+    
+    <div class="bg-green-400 flex flex-col"> 
 
         <p v-if="productStore.loadingProduct"> Cargando Productos ...</p>
 
-        <a-space
+        <a-space class="h-100 ml-3"
             direction="vertical"
             v-if="!productStore.loadingProduct"
-            style="width: 100%"
+            
         >
-            <a-card
+            <a-card class="bg-green-200 text-gray-800 text-3xl m-5 font-bold"
                 v-for="item of productStore.productos"
                 :key="item.id"
                 :title="item.productName"
               
             >
-                <div class="text-center mb-5">
-                 <a-avatar :src="item.photoURL" :size="150"></a-avatar>
-                </div>
+                <div class="flex justify-center">
+                 <img :src="item.photoURL" alt="" class="w-64 rounded-s-3xl">
+               </div>
 
                 <template #extra>
-                    <a-space>
+                    <a-space v-if="userStore.esAdmin">
                         <a-popconfirm
                             title="¿Estás seguro que deseas eliminar?"
                             ok-text="Sí"
@@ -39,14 +44,14 @@
                             @confirm="confirm(item.id)"
                             @cancel="cancel"
                         >
-                            <a-button
-                                danger
+                            <a-button class="bg-red-500 text-white hover:bg-red-600 active:bg-red-700 focus:outline-none rounded-s-full"
+                                
                                 :loading="productStore.loading"
                                 :disabled="productStore.loading"
                                 >Eliminar</a-button
                             >
                         </a-popconfirm>
-                        <a-button
+                        <a-button class="rounded-r-full focus:outline-none"
                             type="primary"
                             @click="router.push(`/editar/${item.id}`)"
                             >Editar</a-button
@@ -56,9 +61,9 @@
                         > -->
                     </a-space>
                 </template>
-                <p>Detalles: {{ item.productDetails }}</p>
-                <p>Stock: {{ item.productStock }}</p>
-                <p>Precio: {{ item.productPrice }}</p>
+                <p>Detalles: {{ String(item.productDetails).toLocaleUpperCase() }}</p> <br>
+                <p>Stock: {{ item.productStock }}</p> <br>
+                <p>Precio: ${{ item.productPrice }}</p>
             </a-card>
         </a-space>
     </div>

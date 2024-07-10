@@ -55,8 +55,8 @@ export const useUserStore = defineStore("userStore", {
         // this.userData = { email: user.email, uid: user.uid };
         const docRef = doc(db, "users", user.uid);
 
-        console.log("usuario q devuelve el register...");
-        console.log(user);
+        //console.log("usuario q devuelve el register...");
+        //console.log(user);
 
         this.userData = {
           uid: user.uid,
@@ -66,7 +66,7 @@ export const useUserStore = defineStore("userStore", {
           email: user.email,
         };
 
-        console.log(this.userData);
+        //console.log(this.userData);
 
         await setDoc(docRef, this.userData);
 
@@ -212,7 +212,7 @@ export const useUserStore = defineStore("userStore", {
         //storage/object-not-found
         const photoURL = await getDownloadURL(storageRef);
 
-        console.log(photoURL);
+        //console.log(photoURL);
         return photoURL;
       } catch (error) {
         console.log(error.code);

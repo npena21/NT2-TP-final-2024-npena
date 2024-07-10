@@ -1,19 +1,21 @@
 <template>
-    <h1 class="text-center">Perfil de usuario</h1>
-    <!-- <p>{{ userStore.userData }}</p> -->
+
+<div class="bg-green-200 ">
+    <h1 class="text-gray-600 text-5xl text-center mb-5">Perfil de Usuario</h1>
+  
     <div class="text-center mb-5">
         <a-avatar :src="userStore.userData.photoURL" :size="200"></a-avatar>
     </div>
-    <a-row>
+    <a-row >
         <a-col :xs="{ span: 24 }" :sm="{ span: 12, offset: 6 }">
-            <a-form
+            <a-form class=""
                 name="basicPerfil"
                 autocomplete="off"
                 layout="vertical"
                 :model="userStore.userData"
                 @finish="onFinish"
             >
-                <a-form-item
+                <a-form-item class="text-2xl"
                     name="email"
                     label="Tu correo (no modificable)"
                     
@@ -71,6 +73,8 @@
             </a-form>
         </a-col>
     </a-row>
+
+    </div>
 </template>
 
 <script setup>

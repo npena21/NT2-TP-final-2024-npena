@@ -1,5 +1,7 @@
 <template>
-<h1>Cargar imagen Default</h1>
+
+    <div class="mb-5">
+<h1 class="text-2xl mb-3 underline">Cargar imagen Default</h1>
 
             <a-form
                 name="imagenDefault"
@@ -13,11 +15,17 @@
                     :before-upload="beforeUpload"
                     @change="handleChange"
                 >
-                    <a-button>Subir img Default</a-button>
-                </a-upload>
+                    <a-button class="block bg-green-500 text-white hover:bg-green-400 rounded-full"
+                    
+                    :disabled="userStore.loadingUser"
+                        :loading="userStore.loadingUser"
+                        >
+                        Subir img default</a-button>
+                    </a-upload>
 
-                <a-form-item class="mt-5">
+                <a-form-item class="mt-2 mb-5">
                     <a-button
+                    class="rounded-full "
                         type="primary"
                         html-type="submit"
                         :disabled="userStore.loadingUser"
@@ -27,7 +35,7 @@
                 </a-form-item>
             </a-form>  
 
-
+        </div>
 </template>
 
 <script setup>

@@ -1,11 +1,13 @@
 <template>
+<div class="bg-green-200 h-54">
 
-    <h1>Administrar Cuentas de Usuarios</h1>
+    <h1 class="text-4xl text-center mb-10 underline ">Administrar Cuentas de Usuarios</h1>
 
     <div>
     <ul>
         <template  v-for="item of userStore.minusMe" :key="item.uid">
 
+            <div class="text-gray-600 ml-5 mb-2">
             <AdministrarItem
             :uid="item.uid"
             :displayName="item.displayName"
@@ -13,15 +15,17 @@
             :email="item.email"
             @actualizaRefresca="actualizarRefrescar"
             ></AdministrarItem>
+        </div>
         </template>
     </ul>
     </div>
 
-    <div>
+    <div class="mt-7 ml-5">
         <ImagenDefault></ImagenDefault>
 
     </div>
 
+</div>
   
 </template>
 

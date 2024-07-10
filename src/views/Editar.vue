@@ -1,10 +1,15 @@
 <template>
-    <div>
-        <h1>Editar Producto id: {{ route.params.id }}</h1>
+    <div class="bg-green-200">
+        <h1 class="text-2xl mb-2 ml-2">Editar Producto id: <span class="text-1xl text-gray-500">{{ route.params.id }}</span></h1>
 
-        <a-input disabled v-model:value="formState.productName"></a-input>
+        <a-input 
+        class="ml-3"
+        disabled
+        v-model:value="formState.productName"></a-input>
 
         <a-form
+
+        class="ml-3"
             name="editform"
             autocomplete="off"
             layout="vertical"
@@ -13,6 +18,7 @@
         >
 
         <a-form-item
+        class=""
             name="Stock"
             label="Ingrese el nuevo Stock"
             
@@ -82,7 +88,7 @@ const onFinish = async (values) => {
         formState.Precio='';
         formState.Detalle='';
 
-        return message.success("Prodcuto editado");
+        return message.success("Producto editado");
     }
 
     switch (error) {
@@ -97,12 +103,10 @@ const onFinish = async (values) => {
 
 onMounted(async () => {
 
-    console.log('empezando onmounted')
+    
     const prodNow = await productStore.leerDatosProd(route.params.id);
 
-        console.log(prodNow.Stock)
-        console.log(prodNow)    
-
+        
         formState.Stock = prodNow.Stock;
         formState.Precio= prodNow.Precio;
         formState.Detalle= prodNow.Detalle;

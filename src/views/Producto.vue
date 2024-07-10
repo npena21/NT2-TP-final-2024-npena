@@ -1,8 +1,11 @@
 <template>
-    <h1 class="text-center">Producto</h1>
-    <a-row>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12, offset: 6 }">
-            <a-form
+
+<div class="bg-green-200 ">
+
+    <h1 class="text-center text-gray-600 text-4xl mb-5 ">Producto</h1>
+    <a-row class="">
+        <a-col class="" :xs="{ span: 24 }" :sm="{ span: 12, offset: 6 }">
+            <a-form class=""
                 name="basicProduct"
                 autocomplete="off"
                 layout="vertical"
@@ -81,6 +84,8 @@
             </a-form>
         </a-col>
     </a-row>
+
+</div>
 </template>
 
 <script setup>

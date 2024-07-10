@@ -37,12 +37,17 @@ const requireAuthAdmin = async (to, from, next) => {
 };
 
 const redireccion = async (to, from, next) => {
-  const databaseStore = useDatabaseStore();
+  /*   const databaseStore = useDatabaseStore();
+  
+  
+  // console.log(to.params.pathMatch[0]);
+  const name = await databaseStore.getURL(to.params.pathMatch[0]); */
+
+  console.log(to.params.pathMatch[0]);
   const userStore = useUserStore();
   userStore.loadingSession = true;
-  // console.log(to.params.pathMatch[0]);
-  const name = await databaseStore.getURL(to.params.pathMatch[0]);
-  if (!name) {
+
+  if (!false) {
     next();
     userStore.loadingSession = false;
   } else {

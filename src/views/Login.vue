@@ -1,5 +1,7 @@
 <template>
-    <h1 class="text-center">Login</h1>
+
+    <div class="bg-green-200">
+    <h1 class="text-center text-3xl mb-5">Login</h1>
     <a-row>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12, offset: 6 }">
             <a-form
@@ -53,6 +55,8 @@
             </a-form>
         </a-col>
     </a-row>
+
+</div>
 </template>
 
 <script setup>
